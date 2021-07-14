@@ -1,0 +1,25 @@
+name: mingw
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: msys2 {0}
+
+env:
+  CMAKE_GENERATOR: 'Unix Makefiles'
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        update: true
+        install: mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake make
+
+    - run: |
+        mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && make -j2 && ctest --output-on-failure
