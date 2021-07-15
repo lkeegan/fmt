@@ -14,6 +14,8 @@
 #include <locale>
 #include <sstream>
 
+#include <iostream>
+
 #include "format.h"
 
 FMT_BEGIN_NAMESPACE
@@ -534,6 +536,8 @@ template <typename Char> struct formatter<std::tm, Char> {
     for (;;) {
       size_t size = buf.capacity() - start;
       size_t count = detail::strftime(&buf[start], size, &tm_format[0], &tm);
+        std::cout << "size " << size << std::endl;
+        std::cout << "count " << count << std::endl;
       if (count != 0) {
         buf.resize(start + count);
         break;

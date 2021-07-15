@@ -22,4 +22,4 @@ jobs:
         install: mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake make
 
     - run: |
-        mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && make -j2 && ctest --output-on-failure
+        mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && make -j2 && ./bin/chrono-test
